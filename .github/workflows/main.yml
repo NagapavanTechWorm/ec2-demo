@@ -1,7 +1,7 @@
 name: Create EC2 Instance
 
 on:
-  workflow_dispatch: # Lets you run it manually
+  workflow_dispatch:
 
 jobs:
   create-ec2:
