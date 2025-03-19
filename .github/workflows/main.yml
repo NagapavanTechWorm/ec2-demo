@@ -17,10 +17,10 @@ jobs:
       - name: Launch EC2 Instance
         run: |
           aws ec2 run-instances \
-            --image-id ami-0c55b159cbfafe1f0 \ # Amazon Linux 2 AMI (us-east-1), check if it works in your region
-            --instance-type t2.micro \        # Free tier instance
-            --key-name mybackend \          # Your key pair name
-            --security-group-ids sg-027701b86ea260afe \ # Your security group ID
-            --subnet-id subnet-06e15f3bec55eb8ce \     # Your subnet ID
-            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=My-First-EC2}]" \
+            --image-id ami-0e86e20dae9224db8 \
+            --instance-type t2.micro \
+            --key-name mybackend \
+            --security-group-ids sg-027701b86ea260afe \
+            --subnet-id subnet-06e15f3bec55eb8ce \
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=My-First-Ubuntu-EC2}]" \
             --count 1
