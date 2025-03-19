@@ -1,0 +1,26 @@
+name: Create EC2 Instance
+
+on:
+  workflow_dispatch: # Lets you run it manually
+
+jobs:
+  create-ec2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Launch EC2 Instance
+        run: |
+          aws ec2 run-instances \
+            --image-id ami-0c55b159cbfafe1f0 \ # Amazon Linux 2 AMI (us-east-1), check if it works in your region
+            --instance-type t2.micro \        # Free tier instance
+            --key-name mybackend \          # Your key pair name
+            --security-group-ids sg-027701b86ea260afe \ # Your security group ID
+            --subnet-id subnet-06e15f3bec55eb8ce \     # Your subnet ID
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=My-First-EC2}]" \
+            --count 1
